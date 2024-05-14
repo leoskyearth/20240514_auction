@@ -10,16 +10,16 @@ def calculate_bid_price(appraisal_price, lowest_price, leverage_interest_rate, i
     sell_price = sell_price * 1000000
     non_recognized_expenses = non_recognized_expenses * 1000000
 
-    bid_price = appraisal_price * auction_rate - acquisition_cost
+    bid_price = appraisal_price * auction_rate
     leverage = min(appraisal_price * 0.6, bid_price * 0.8)
     required_cash = bid_price - leverage
 
     if bid_price <= 600000000:
-        registration_tax = bid_price * 0.01
+        registration_tax = bid_price * 0.01 - acquisition_cost
     elif bid_price >= 900000000:
-        registration_tax = bid_price * 0.03
+        registration_tax = bid_price * 0.03 - acquisition_cost
     else:
-        registration_tax = bid_price * (0.01 + 0.02 * (bid_price - 600000000) / 300000000)
+        registration_tax = bid_price * (0.01 + 0.02 * (bid_price - 600000000) / 300000000) -acquisition_cost
 
     if bid_price <= 100000000:
         national_housing_bond = 300000
